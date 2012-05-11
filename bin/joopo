@@ -1,0 +1,2 @@
+require 'joopo'
+Joopo::Proxy.run
