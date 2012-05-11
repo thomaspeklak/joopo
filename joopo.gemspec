@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["thomas.peklak@gmail.com"]
   gem.description   = %q{A universal proxy for external apis.}
   gem.summary       = %q{This gem opens a server via Sinatra that can be used to proxy external apis. This is usefull for JavaScript development when you need to connect to a server that is not on your development domain.}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/thomaspeklak/joopo"
 
   gem.required_ruby_version     = ">= 1.8.7"
   gem.required_rubygems_version = ">= 1.3.6"
