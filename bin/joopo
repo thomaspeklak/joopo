@@ -1,2 +1,5 @@
+puts "## JOOPO - a simple development proxy\n\n"
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/../lib"
+
 require 'joopo'
-Joopo::Proxy.run
+Joopo::Proxy.run!
