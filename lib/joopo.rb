@@ -23,23 +23,33 @@ module Joopo
     get '/:api/*' do
       api = params[:api]
       pass unless settings['apis'].has_key?(params[:api])
-      response = open(settings['apis'][api] + params['splat'].first + '?' + hash_to_querystring(params.clone))
-      content_type response.content_type
-      response.read
+      if settings['apis'][api].class == Hash
+        content_type settings['apis'][api]['content_type']
+        settings['apis'][api]['content']
+      else
+        response = open(settings['apis'][api] + params['splat'].first + '?' + hash_to_querystring(params.clone))
+        content_type response.content_type
+        response.read
+      end
     end
 
     post '/:api/*' do
       api = params[:api]
       pass unless settings['apis'].has_key?(params[:api])
 
-      query_params = request.env['QUERY_STRING']
-      post_vars = request.env["rack.request.form_hash"]
+      if settings['apis'][api].class == Hash
+        content_type settings['apis'][api]['content_type']
+        settings['apis'][api]['content']
+      else
+        query_params = request.env['QUERY_STRING']
+        post_vars = request.env["rack.request.form_hash"]
 
-      uri = URI.parse(settings['apis'][api] + params['splat'].first + '?' + query_params)
+        uri = URI.parse(settings['apis'][api] + params['splat'].first + '?' + query_params)
 
-      response = Net::HTTP.post_form(uri, post_vars)
-      content_type response.content_type
-      response.body
+        response = Net::HTTP.post_form(uri, post_vars)
+        content_type response.content_type
+        response.body
+      end
     end
 
     def hash_to_querystring(hash)

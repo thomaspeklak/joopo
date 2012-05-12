@@ -2,7 +2,7 @@
 
 A universal proxy for external apis.
 
-This gem opens a server via Sinatra that can be used to proxy external apis. This is usefull for JavaScript development when you need to connect to a server that is not on your development domain.
+This gem opens a server via Sinatra that can be used to proxy external apis. This is usefull for JavaScript development when you need to connect to a server that is not on your development domain. Additionally you can serve your static files and stub apis with fake responses. See example below.
 
 ## Installation
 
@@ -22,12 +22,19 @@ The configuration YAML can have the following entries:
 
 ###Sample
 
-  port: 4567
-  public: test/public
-  apis:
-    testapi: http://localhost:9000/test/
+    public: test/public
+    apis:
+      testapi: http://localhost:9000/test/
+      fakeapi: 
+        content_type: json
+        content:  |
+          {
+            "test": "Hello World"
+          }
 
-With this configuration you can make request to `http://localhost:4567/testapi/whatever/you?like` that are proxied to `http://localhost:9000/test/whatever/you?like`.
+With this configuration you can make request to `http://localhost:4567/testapi/whatever/you?like` that are proxied to `http://localhost:9000/test/whatever/you?like`. Your static files in `test/public` are served from this proxy, too. E.g. if you have a file `styles.css` in the directory `test/public/styles`, you can access it via `http://localhost:4567/styles/styles.css`.
+
+Because of the _fakeapi_ entry all requests to `http://localhost:4567/fakeapi/` and its subdirectoies will return a json with content `{"test": "Hello World"}`.
 
 ## Usage
 
