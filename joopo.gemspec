@@ -12,7 +12,8 @@ Gem::Specification.new do |gem|
   gem.required_rubygems_version = ">= 1.3.6"
   gem.rubyforge_project         = "joopo"
 
-  gem.add_dependency(%q<sinatra>, ["~> 1.2"])
+  gem.add_dependency(%q<sinatra>, ["~> 1.3"])
+  gem.add_development_dependency(%q<bundler>, ["> 1.0"])
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
