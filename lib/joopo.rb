@@ -16,8 +16,11 @@ module Joopo
     settings['port'] ||= 4567
     settings['apis'] ||= {}
 
+    set :root, Dir.pwd
+    set :static, true
+    set :public_folder, File.join(root, settings['public_folder'])
+    puts "Static files servered from: " + File.join(root, settings['public_folder'])
 
-    set :public_folder, Dir.pwd + '/' + settings['public_folder']
     set :port, settings['port']
 
     get '/:api/*' do
