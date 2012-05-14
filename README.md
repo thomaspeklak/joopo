@@ -22,7 +22,7 @@ The configuration YAML can have the following entries:
 
 ###Sample
 
-    public: test/public
+    public_folder: test/public
     apis:
       testapi: http://localhost:9000/test/
       fakeapi: 
